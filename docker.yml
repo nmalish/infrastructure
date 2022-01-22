@@ -1,0 +1,17 @@
+---
+- name: Main point to run all tasks
+  hosts: linux
+  become: yes
+
+  tasks:
+    - name: Install required system packages
+      package:
+        state: latest
+        name:
+          - "ca-certificates"
+          - "curl"
+          - "software-properties-common"
+          - "python3-pip"
+          - "virtualenv"
+          - "python3-setuptools"
+          - "docker-compose"

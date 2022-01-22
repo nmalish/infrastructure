@@ -1,0 +1,10 @@
+---
+- name: Main point to run all tasks
+  hosts: linux
+  become: yes
+
+- hosts: linux
+  tasks:
+    - import_tasks: docker/tasks/main.yml
+      tags:
+        - docker
