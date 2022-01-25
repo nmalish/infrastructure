@@ -4,7 +4,11 @@
   become: yes
 
 - hosts: linux
-  tasks:
-    - import_tasks: docker/tasks/main.yml
+  roles:
+    - role: essential
+      tags:
+        - essential
+
+    - role: docker
       tags:
         - docker

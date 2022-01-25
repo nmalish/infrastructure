@@ -1,6 +1,6 @@
 ---
 docker_deps:
-  # - "apt-transport-https"
+  - "apt-transport-https"
   - "ca-certificates"
   - "curl"
   - "software-properties-common"

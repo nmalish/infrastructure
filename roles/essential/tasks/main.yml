@@ -1,0 +1,33 @@
+---
+- name: Ubuntu specific tasks
+  become: yes
+  when: ansible_facts['distribution'] == 'Ubuntu'
+  block:
+    - name: Update and upgrade apt packages (Debian and Ubuntu)
+      when: ansible_os_family == 'Debian'
+      shell:
+        cmd: apt update && apt upgrade -y
+
+    - name: Check if reboot required
+      stat:
+        path: /var/run/reboot-required
+      register: reboot_required_file
+
+    - name: Reboot if required
+      reboot:
+        msg: Rebooting due to a kernel update
+      when: reboot_required_file.stat.exists == true
+
+    - name: Install extra packages
+      package:
+        name: "{{ extra_packages }}"
+        state: latest
+
+    # - name: Disable fish greeting
+    #   lineinfile:
+    #     path: /home/{{ username }}/.config/fish/fish_variables
+    #     state: present
+    #     regexp: "fish_greeting:.+"
+    #     line: "SETUVAR fish_greeting:"
+    #   when: '"fish" in shell'
+    #   ignore_errors: true
