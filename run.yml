@@ -12,3 +12,10 @@
     - role: docker
       tags:
         - docker
+
+    # containers
+    - role: containers/pihole
+      when: enable_pihole | default(False)
+      tags:
+        - pihole
+        - containers
