@@ -19,3 +19,9 @@
       tags:
         - pihole
         - containers
+
+    - role: containers/openbooks
+      tags:
+        - openbooks
+        - containers
+      when: enable_openbooks | default(False)
